@@ -3,6 +3,8 @@ import FilterSongs from "../../components/FilterSongs/FilterSongs";
 import Song from "../../components/Song/Song";
 import useSongs from "./useSongs";
 import "./App.css";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
 
 type IFormData = {
   filter: string;
@@ -46,21 +48,29 @@ function App() {
         ) : !songs ? (
           <p data-testid="loadingText">Loading...</p>
         ) : (
-          songs
-            // @ts-ignore
-            .filter(
-              (song: ISong) =>
-                song.title
-                  .toLowerCase()
-                  .includes(formData.filter.toLowerCase()) ||
-                song.album
-                  .toLowerCase()
-                  .includes(formData.filter.toLowerCase()) ||
-                song.lyrics
-                  .toLowerCase()
-                  .includes(formData.filter.toLowerCase())
-            )
-            .map((song: ISong) => <Song key={song.id} song={song} />)
+          <Paper style={{ marginTop: "1.25rem" }}>
+            <Grid container spacing={3} justify="center" alignItems="baseline">
+              {songs
+                // @ts-ignore
+                .filter(
+                  (song: ISong) =>
+                    song.title
+                      .toLowerCase()
+                      .includes(formData.filter.toLowerCase()) ||
+                    song.album
+                      .toLowerCase()
+                      .includes(formData.filter.toLowerCase()) ||
+                    song.lyrics
+                      .toLowerCase()
+                      .includes(formData.filter.toLowerCase())
+                )
+                .map((song: ISong) => (
+                  <Grid item>
+                    <Song key={song.id} song={song} />
+                  </Grid>
+                ))}
+            </Grid>
+          </Paper>
         )}
       </section>
     </div>

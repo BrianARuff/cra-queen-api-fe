@@ -2,3 +2,9 @@
   background: #ffc107 !important;
   color: #311b92 !important;
 }
+
+.brand-button {
+  width: 100%;
+  border-radius: 0 !important;
+  transform: none !important;
+}
