@@ -18,14 +18,12 @@ describe("Songs Component", () => {
       </Router>
     );
     const title = await wrapper.findAllByText(/doing all right/i);
-    const album = wrapper.queryByText(/queen/i);
     const lyrics = wrapper.queryByText(/Yesterday my life was in ruin/i);
-    const allLyrics = wrapper.queryByTestId("lyrics")?.textContent?.length;
+    const allLyricsLen = wrapper.queryByTestId("lyrics")?.textContent?.length;
 
     expect(title[0]).toBeInTheDocument();
-    expect(album).toBeInTheDocument();
     expect(lyrics).toBeInTheDocument();
-    expect(allLyrics).toBe(303);
+    expect(allLyricsLen).toBe(303);
 
     const button = wrapper.getByTestId("button");
 
@@ -37,7 +35,7 @@ describe("Songs Component", () => {
       })
     );
 
-    const allLyrics2 = wrapper.queryByTestId("lyrics")?.textContent?.length;
-    expect(allLyrics2).toBeGreaterThan(allLyrics as number);
+    const allLyricsLen2 = wrapper.queryByTestId("lyrics")?.textContent?.length;
+    expect(allLyricsLen2).toBeGreaterThan(allLyricsLen as number);
   });
 });
