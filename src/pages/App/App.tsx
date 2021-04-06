@@ -17,10 +17,11 @@ type ISong = {
 
 function App() {
   const [songs, songError] = useSongs();
-  console.log(songs);
+
   const [formData, setFormData] = React.useState<IFormData>({
     filter: "",
   });
+
   function handleFilterSongs(e: React.BaseSyntheticEvent) {
     setFormData(() => ({
       ...formData,
