@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Button from "@material-ui/core/Button";
 
 type IProps = {
   song: {
@@ -31,9 +32,14 @@ export default function Song(props: IProps) {
       <p data-testid="lyrics">
         {!fullLen ? lyrics.slice(0, 300) + "..." : lyrics}
       </p>
-      <button data-testid="button" onClick={handleSwitchSongLength}>
+      <Button
+        variant="contained"
+        color="primary"
+        data-testid="button"
+        onClick={handleSwitchSongLength}
+      >
         Show More Lyrics
-      </button>
+      </Button>
     </div>
   );
 }
