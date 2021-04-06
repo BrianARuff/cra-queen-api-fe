@@ -22,7 +22,11 @@ export default function DynamicSong() {
   ) : !song ? (
     <p>Loading...</p>
   ) : (
-    <article>
+    <article
+      style={{
+        margin: "1rem",
+      }}
+    >
       <h2>{song.title}</h2>
       <h3>{song.album}</h3>
       <p>{song.lyrics}</p>

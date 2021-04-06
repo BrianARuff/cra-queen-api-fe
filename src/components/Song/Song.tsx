@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 type IProps = {
@@ -11,18 +12,28 @@ type IProps = {
 
 export default function Song(props: IProps) {
   const { title, album, lyrics, id } = props.song;
+  const [fullLen, setFullLen] = useState<boolean>(false);
+  function handleSwitchSongLength() {
+    setFullLen(!fullLen);
+  }
   return (
     <div
       style={{
-        width: "300px",
-        margin: "20px",
+        width: "18.75rem",
+        margin: "1.25rem",
       }}
+      data-id={`song-${id}`}
     >
       <h2 style={{ textDecoration: "underline" }}>
         <Link to={`/${id}`}>{title}</Link>
       </h2>
       <h3>{album}</h3>
-      <p>{lyrics.slice(0, 300)}...</p>
+      <p data-testid="lyrics">
+        {!fullLen ? lyrics.slice(0, 300) + "..." : lyrics}
+      </p>
+      <button data-testid="button" onClick={handleSwitchSongLength}>
+        Show More Lyrics
+      </button>
     </div>
   );
 }

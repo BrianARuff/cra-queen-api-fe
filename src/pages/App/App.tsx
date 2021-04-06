@@ -1,5 +1,5 @@
 import * as React from "react";
-import FilterSongs from "../../components/Song/FilterSongs/FilterSongs";
+import FilterSongs from "../../components/FilterSongs/FilterSongs";
 import Song from "../../components/Song/Song";
 import "./App.css";
 
@@ -47,7 +47,8 @@ function App() {
   }
 
   return (
-    <>
+    <div style={{ textAlign: "center" }}>
+      <h1>Queen Songs</h1>
       <FilterSongs handleFilterSongs={handleFilterSongs} />
       <section
         style={{
@@ -78,7 +79,7 @@ function App() {
             .map((song) => <Song key={song.id} song={song} />)
         )}
       </section>
-    </>
+    </div>
   );
 }
 

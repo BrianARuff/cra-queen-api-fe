@@ -11,15 +11,10 @@ export default function FilterSongs(props: IProps) {
         textAlign: "center",
       }}
     >
-      <h1>
-        <label style={{ flex: "1" }} htmlFor="filter">
-          Filter Songs
-        </label>
-      </h1>
       <input
         style={{
-          width: "300px",
-          height: "30px",
+          width: "18.75rem",
+          height: "1.875rem",
           alignSelf: "center",
           textAlign: "center",
           fontStyle: "italic",
