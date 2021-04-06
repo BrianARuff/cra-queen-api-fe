@@ -24,6 +24,7 @@ export default function FilterSongs(props: IProps) {
         id="filter"
         name="filter"
         placeholder="Search by title, album name, or lyrics here..."
+        data-testid="input"
       />
     </div>
   );

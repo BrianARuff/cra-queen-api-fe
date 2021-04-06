@@ -1,9 +1,7 @@
-import React from "react";
 import * as rctl from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { BrowserRouter as Router } from "react-router-dom";
 import Song from "./Song";
-import { fireEvent, getByTestId, getByText } from "@testing-library/react";
 
 describe("Songs Component", () => {
   it("should render the songs title, album name, lyrics, and ID.", async () => {
@@ -32,7 +30,7 @@ describe("Songs Component", () => {
     const button = wrapper.getByTestId("button");
 
     rctl.fireEvent(
-      getByText(button, /Show more lyrics/i),
+      rctl.getByText(button, /Show more lyrics/i),
       new MouseEvent("click", {
         bubbles: true,
         cancelable: true,
