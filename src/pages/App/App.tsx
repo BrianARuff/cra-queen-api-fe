@@ -2,13 +2,11 @@ import * as React from "react";
 import FilterSongs from "../../components/FilterSongs/FilterSongs";
 import Song from "../../components/Song/Song";
 import useSongs from "./useSongs";
-import "./App.css";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-
-type IFormData = {
-  filter: string;
-};
+import useForm from "./useForm";
+import "./App.css";
+import Loader from "../../components/Loader/Loader";
 
 type ISong = {
   id: number;
@@ -19,20 +17,10 @@ type ISong = {
 
 function App() {
   const [songs, songError] = useSongs();
-
-  const [formData, setFormData] = React.useState<IFormData>({
-    filter: "",
-  });
-
-  function handleFilterSongs(e: React.BaseSyntheticEvent) {
-    setFormData(() => ({
-      ...formData,
-      [e.target.name]: e.target.value,
-    }));
-  }
+  const { formData, handleFilterSongs } = useForm();
 
   return (
-    <div style={{ textAlign: "center" }}>
+    <Paper style={{ textAlign: "center", overflow: "hidden" }}>
       <h1>Queen Songs</h1>
       <FilterSongs handleFilterSongs={handleFilterSongs} />
       <section
@@ -46,34 +34,43 @@ function App() {
         {songError ? (
           <p>Error loading songs...</p>
         ) : !songs ? (
-          <p data-testid="loadingText">Loading...</p>
+          <>
+            <p data-testid="loadingText">Loading...</p>
+            <Loader />
+          </>
         ) : (
-          <Paper style={{ marginTop: "1.25rem" }}>
-            <Grid container spacing={3} justify="center" alignItems="baseline">
-              {songs
-                // @ts-ignore
-                .filter(
-                  (song: ISong) =>
-                    song.title
-                      .toLowerCase()
-                      .includes(formData.filter.toLowerCase()) ||
-                    song.album
-                      .toLowerCase()
-                      .includes(formData.filter.toLowerCase()) ||
-                    song.lyrics
-                      .toLowerCase()
-                      .includes(formData.filter.toLowerCase())
-                )
-                .map((song: ISong) => (
-                  <Grid item>
-                    <Song key={song.id} song={song} />
-                  </Grid>
-                ))}
-            </Grid>
-          </Paper>
+          <Grid
+            style={{ margin: "1.25rem" }}
+            container
+            spacing={3}
+            justify="center"
+            alignItems="baseline"
+          >
+            {songs
+              // @ts-ignore
+              .filter((song: ISong) => {
+                console.log(song.lyrics);
+                return (
+                  song.title
+                    .toLowerCase()
+                    .includes(formData.filter.toLowerCase()) ||
+                  song.album
+                    .toLowerCase()
+                    .includes(formData.filter.toLowerCase()) ||
+                  song.lyrics
+                    .toLowerCase()
+                    .includes(formData.filter.toLowerCase())
+                );
+              })
+              .map((song: ISong) => (
+                <Grid item>
+                  <Song key={song.id} song={song} />
+                </Grid>
+              ))}
+          </Grid>
         )}
       </section>
-    </div>
+    </Paper>
   );
 }
 
