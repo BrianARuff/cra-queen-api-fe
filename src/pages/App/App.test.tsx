@@ -7,6 +7,6 @@ import { act } from "@testing-library/react-hooks";
 describe("App", () => {
   it("renders without crashing", () => {
     render(<App />);
-    expect(screen.getByTestId("loadingText")).toBeInTheDocument();
+    expect(screen.getByTestId("loadingTextw")).toBeInTheDocument();
   });
 });

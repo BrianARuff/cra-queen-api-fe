@@ -1,13 +1,14 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./pages/App/App";
-import DynamicSong from "./pages/DynamicSong/DynamicSong";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Route, Switch } from "react-router";
 import { ThemeProvider, Container } from "@material-ui/core";
 import theme from "./theme/theme";
+import Loader from "./components/Loader/Loader";
+const App = React.lazy(() => import("./pages/App/App"));
+const DynamicSong = React.lazy(() => import("./pages/DynamicSong/DynamicSong"));
 
 ReactDOM.render(
   <React.StrictMode>
@@ -15,8 +16,10 @@ ReactDOM.render(
       <Container>
         <Router>
           <Switch>
-            <Route exact path="/" component={App} />
-            <Route exact path="/:id" component={DynamicSong} />
+            <Suspense fallback={Loader}>
+              <Route exact path="/" component={App} />
+              <Route exact path="/:id" component={DynamicSong} />
+            </Suspense>
           </Switch>
         </Router>
       </Container>

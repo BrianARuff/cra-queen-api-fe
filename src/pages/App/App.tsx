@@ -1,11 +1,11 @@
 import FilterSongs from "../../components/FilterSongs/FilterSongs";
-import Song from "../../components/Song/Song";
 import useSongs from "./useSongs";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import useForm from "./useForm";
 import "./App.css";
 import Loader from "../../components/Loader/Loader";
+import Song from "../../components/Song/Song";
 
 type ISong = {
   id: number;
