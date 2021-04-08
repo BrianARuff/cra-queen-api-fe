@@ -23,7 +23,7 @@ export default function App() {
       style={{ textAlign: "center", overflow: "hidden", minHeight: "100vh" }}
     >
       <h1>Queen Songs</h1>
-      <FilterSongs handleFilterSongs={handleFilterSongs} />
+      {songs ? <FilterSongs handleFilterSongs={handleFilterSongs} /> : null}
       <section
         style={{
           display: "flex",
@@ -32,7 +32,7 @@ export default function App() {
           alignItems: "center",
         }}
       >
-        {songError ? (
+        {songError.message.length ? (
           <p>Error loading songs...</p>
         ) : !songs ? (
           <>
@@ -46,6 +46,7 @@ export default function App() {
             spacing={3}
             justify="center"
             alignItems="baseline"
+            data-testid="grid"
           >
             {songs
               .filter(

@@ -13,14 +13,20 @@ type ISongs = {
 
 export default function useSongs() {
     const [songs, setSongs] = useState<ISongs | null>(null);
-    const [songError, setSongError] = useState<IError | null>(null);
+    const [songError, setSongError] = useState<IError>({message: ""});
 
     useEffect(() => {
-      fetch("https://queen-songs.herokuapp.com/songs")
-        .then(res => res.json())
-        .then(songs => setSongs(songs))
-        .catch(err => setSongError(err));
-      }, []);
+      const fetchSong = async () => {
+        try {
+          const data: any = await fetch("https://queen-songs.herokuapp.com/songs")
+          .then(res => res.json());
+          setSongs(data)
+        } catch (error) {
+          setSongError(error);
+        }
+      }
+      fetchSong()
+    }, []);
     
       return {songs, songError}
 }
