@@ -1,11 +1,12 @@
 import * as React from "react";
+import { useState } from "react";
 
 type IFormData = {
   filter: string;
 };
 
 export default function useForm() {
-  const [formData, setFormData] = React.useState<IFormData>({
+  const [formData, setFormData] = useState<IFormData>({
     filter: "",
   });
 

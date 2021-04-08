@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState, useEffect } from "react";
 
 type ISongs = {
     id: number;
@@ -12,22 +12,15 @@ type ISongs = {
   };
 
 export default function useSongs() {
-    const [songs, setSongs] = React.useState<ISongs[] | null>(null);
-    const [songError, setSongError] = React.useState<IError | null>(null);
-  
-    async function getSongs() {
-      try {
-        const songsData = await fetch("https://queen-songs.herokuapp.com/songs");
-        const data = await songsData.json();
-        setSongs(data);
-      } catch (error) {
-        setSongError(error);
-      }
-    }
+    const [songs, setSongs] = useState<ISongs | null>(null);
+    const [songError, setSongError] = useState<IError | null>(null);
 
-    React.useEffect(() => {
-        getSongs();
+    useEffect(() => {
+      fetch("https://queen-songs.herokuapp.com/songs")
+        .then(res => res.json())
+        .then(songs => setSongs(songs))
+        .catch(err => setSongError(err));
       }, []);
     
-      return [songs, songError]
+      return {songs, songError}
 }

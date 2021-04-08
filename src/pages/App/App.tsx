@@ -1,4 +1,3 @@
-import * as React from "react";
 import FilterSongs from "../../components/FilterSongs/FilterSongs";
 import Song from "../../components/Song/Song";
 import useSongs from "./useSongs";
@@ -15,12 +14,14 @@ type ISong = {
   album: string;
 };
 
-function App() {
-  const [songs, songError] = useSongs();
+export default function App() {
+  const { songs, songError } = useSongs();
   const { formData, handleFilterSongs } = useForm();
 
   return (
-    <Paper style={{ textAlign: "center", overflow: "hidden" }}>
+    <Paper
+      style={{ textAlign: "center", overflow: "hidden", minHeight: "100vh" }}
+    >
       <h1>Queen Songs</h1>
       <FilterSongs handleFilterSongs={handleFilterSongs} />
       <section
@@ -47,10 +48,8 @@ function App() {
             alignItems="baseline"
           >
             {songs
-              // @ts-ignore
-              .filter((song: ISong) => {
-                console.log(song.lyrics);
-                return (
+              .filter(
+                (song: ISong) =>
                   song.title
                     .toLowerCase()
                     .includes(formData.filter.toLowerCase()) ||
@@ -59,12 +58,13 @@ function App() {
                     .includes(formData.filter.toLowerCase()) ||
                   song.lyrics
                     .toLowerCase()
+                    .split(" ")
+                    .join(" ")
                     .includes(formData.filter.toLowerCase())
-                );
-              })
+              )
               .map((song: ISong) => (
-                <Grid item>
-                  <Song key={song.id} song={song} />
+                <Grid key={song.id} item>
+                  <Song song={song} />
                 </Grid>
               ))}
           </Grid>
@@ -73,5 +73,3 @@ function App() {
     </Paper>
   );
 }
-
-export default App;

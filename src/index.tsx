@@ -6,18 +6,20 @@ import DynamicSong from "./pages/DynamicSong/DynamicSong";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Route, Switch } from "react-router";
-import { ThemeProvider } from "@material-ui/core";
+import { ThemeProvider, Container } from "@material-ui/core";
 import theme from "./theme/theme";
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <Router>
-        <Switch>
-          <Route exact path="/" component={App} />
-          <Route exact path="/:id" component={DynamicSong} />
-        </Switch>
-      </Router>
+      <Container>
+        <Router>
+          <Switch>
+            <Route exact path="/" component={App} />
+            <Route exact path="/:id" component={DynamicSong} />
+          </Switch>
+        </Router>
+      </Container>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
