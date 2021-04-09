@@ -12,6 +12,7 @@ import Typography from "@material-ui/core/Typography";
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
+    margin: "1rem",
   },
   media: {
     height: 140,
@@ -39,12 +40,11 @@ export default function Song(props: IProps) {
   }
 
   return (
-    <Card className={classes.root} data-id={`song-${id}`}>
+    <Card elevation={24} className={classes.root} data-id={`song-${id}`}>
       <CardActionArea>
         <CardMedia
           component="img"
           alt="queen album cover"
-          className={classes.root}
           image={
             props.song.album === "Queen"
               ? "/queen.webp"
@@ -60,7 +60,7 @@ export default function Song(props: IProps) {
             component="h2"
             style={{ textDecoration: "underline" }}
           >
-            <Link to={`/${id}`}>{title}</Link>
+            <Link to={`/songs/${id}`}>{title}</Link>
           </Typography>
           <Typography
             variant="body2"

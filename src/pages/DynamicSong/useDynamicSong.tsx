@@ -11,8 +11,10 @@ export default function useDynamicSong() {
   const [song, setSong] = React.useState<ISong | null>(null);
   const [error, setError] = React.useState(null);
   React.useEffect(() => {
-    const id = global.location.href.split("/")[3];
-    fetch("https://queen-songs.herokuapp.com/songs/" + id)
+    const locationSplit = global.location.href.split("/");
+    const id = global.location.href.split("/").length - 1;
+    console.log(locationSplit, id, locationSplit[id]);
+    fetch("https://queen-songs.herokuapp.com/songs/" + locationSplit[id])
       .then((res) => res.json())
       .then((song) => setSong(song))
       .catch((err) => setError(err));

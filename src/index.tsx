@@ -6,8 +6,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Route, Switch } from "react-router";
 import { ThemeProvider, Container } from "@material-ui/core";
 import theme from "./theme/theme";
+import App from "./pages/App/App";
 import Loader from "./components/Loader/Loader";
-const App = React.lazy(() => import("./pages/App/App"));
 const DynamicSong = React.lazy(() => import("./pages/DynamicSong/DynamicSong"));
 
 ReactDOM.render(
@@ -15,12 +15,12 @@ ReactDOM.render(
     <ThemeProvider theme={theme}>
       <Container>
         <Router>
-          <Switch>
-            <Suspense fallback={Loader}>
+          <Suspense fallback={<Loader />}>
+            <Switch>
               <Route exact path="/" component={App} />
-              <Route exact path="/:id" component={DynamicSong} />
-            </Suspense>
-          </Switch>
+              <Route exact path="/songs/:id" component={DynamicSong} />
+            </Switch>
+          </Suspense>
         </Router>
       </Container>
     </ThemeProvider>

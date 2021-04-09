@@ -1,12 +1,15 @@
 import * as React from "react";
 import useDynamicSong from "./useDynamicSong";
+import Loader from "../../components/Loader/Loader";
 
 export default function DynamicSong() {
   const [song, error] = useDynamicSong();
   return error ? (
     <p>Error loading song...</p>
   ) : !song ? (
-    <p>Loading...</p>
+    <p>
+      <Loader />
+    </p>
   ) : (
     <article
       style={{
